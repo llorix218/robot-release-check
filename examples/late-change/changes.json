@@ -1,0 +1,14 @@
+[
+  {
+    "change_id": "CHG-88",
+    "release_id": "v1.4.1",
+    "changed_at": "2026-10-09T09:15:00Z",
+    "description": "Navigation parameter adjusted after SAT."
+  },
+  {
+    "change_id": "CHG-89",
+    "release_id": "v1.4.1",
+    "changed_at": "2026-10-09T14:20:00Z",
+    "description": "Warehouse interface timeout changed after SAT."
+  }
+]
