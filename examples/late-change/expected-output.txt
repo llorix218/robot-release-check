@@ -1,0 +1,13 @@
+ROBOT RELEASE EVIDENCE REVIEW
+
+Delivered Release            v1.4.1
+Latest Qualifying PASS       v1.4
+
+R001  EVIDENCE_MISMATCH
+R002  EVIDENCE_GAP
+R003  PASS
+
+OVERALL
+REVIEW REQUIRED
+
+Interpretation: the supplied evidence does not establish a clean delivery/acceptance relationship. This is not a claim that the physical system was unsafe, untested, or incorrectly deployed.
