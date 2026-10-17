@@ -6,7 +6,7 @@ A small, offline checker for one handover problem in robot software delivery: **
 
 `robot-release-check` compares a supplied release, test evidence, post-test changes, and closure evidence. It does **not** connect to robots, production systems, CI/CD, cloud accounts, or source repositories.
 
-![Synthetic robot release evidence report](docs/assets/demo-report.png)
+![Synthetic robot release evidence report](docs/assets/demo-report.svg)
 
 ## 30-second demo
 
