@@ -1,0 +1,9 @@
+[
+  {
+    "test_id": "SAT-1042",
+    "release_id": "v1.4",
+    "status": "PASS",
+    "completed_at": "2026-10-08T11:00:00Z",
+    "test_type": "site_acceptance"
+  }
+]
