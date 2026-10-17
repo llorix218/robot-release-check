@@ -1,5 +1,7 @@
 # robot-release-check
 
+[![Tests](https://github.com/llorix218/robot-release-check/actions/workflows/test.yml/badge.svg)](https://github.com/llorix218/robot-release-check/actions/workflows/test.yml)
+
 > **Did the robot release you are delivering actually match the release your acceptance evidence covers?**
 
 A small, offline checker for one handover problem in robot software delivery: **testing can pass, the system can change afterward, and the final acceptance package may still point to the older release.**
@@ -146,11 +148,13 @@ It is not a safety certification tool, a compliance opinion, a penetration-testi
 
 ## Reviewing a real deployment?
 
-I provide independent, read-only evidence reviews for robot projects approaching customer acceptance. A scoped review can examine a small set of redacted materials without source-code, production-system, or robot access.
+I provide fixed-scope, independent, read-only evidence reviews for robot projects approaching customer acceptance.
 
-Typical review question:
+A typical review examines **one project**, a small set of **redacted artifacts**, and asks:
 
-> Does the final delivered release still line up with the test evidence, post-test changes, issue closure, and handover package supplied for acceptance?
+> Does the final delivered release still line up with the supplied test evidence, post-test changes, issue closure, and handover package?
+
+Typical scope: **8–12 redacted artifacts, 3–5 business days**. No source code, production-system access, or robot access is required.
 
 For independent review inquiries, contact **llorix218@gmail.com**. Do not post confidential project material in a public issue.
 
