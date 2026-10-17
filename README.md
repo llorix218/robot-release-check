@@ -152,7 +152,7 @@ Typical review question:
 
 > Does the final delivered release still line up with the test evidence, post-test changes, issue closure, and handover package supplied for acceptance?
 
-For independent review inquiries, use the contact method on the repository owner's GitHub profile. Do not post confidential project material in a public issue.
+For independent review inquiries, contact **llorix218@gmail.com**. Do not post confidential project material in a public issue.
 
 ## Scope discipline
 
