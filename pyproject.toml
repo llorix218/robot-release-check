@@ -25,3 +25,8 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[project.urls]
+Homepage = "https://github.com/llorix218/robot-release-check"
+Repository = "https://github.com/llorix218/robot-release-check"
+Issues = "https://github.com/llorix218/robot-release-check/issues"
