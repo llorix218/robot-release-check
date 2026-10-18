@@ -65,6 +65,8 @@ For V0.1, every `PASS` record placed in `tests.json` is treated as qualifying ev
 
 For R002, only changes whose `release_id` matches the declared delivered release are evaluated.
 
+For R003, V0.1 checks only whether a closed item supplies a non-empty `verification_evidence` reference. It does **not** resolve the referenced artifact or prove that the verification record is bound to the delivered release. A stale-but-nonempty reference can therefore still pass R003. That is an explicit V0.1 scope boundary, not a claim that the closure is fully verified.
+
 ## Input
 
 A project directory contains four required files.
@@ -142,25 +144,42 @@ A `1` is an evidence-review result, not a statement that the physical system fai
 
 A finding means the **supplied evidence** does not establish a relationship cleanly. Missing evidence is not proof that an activity never occurred.
 
+Likewise, all three checks passing means only that these modeled relationships passed the V0.1 rules. It does **not** establish that the acceptance test scope was complete or sufficient, that every delivered configuration was independently bound to the evidence package, or that every approved deviation was captured.
+
+V0.1 does not validate signed handover manifests, cryptographic configuration manifests, approved-deviation registers, or the adequacy of the underlying test plan.
+
 This utility does not determine whether a physical system is safe, whether testing happened outside the supplied evidence, whether a deployment is compliant, or whether a robot should be operated.
 
 It is not a safety certification tool, a compliance opinion, a penetration-testing tool, or a robot-control system.
 
 ## Reviewing a real deployment?
 
-I provide fixed-scope, independent, read-only evidence reviews for robot projects approaching customer acceptance.
+I provide fixed-scope, independent, read-only Automation Project Assurance for real robot and automation projects approaching an acceptance, handover, scale-up, or project-closure decision.
 
-A typical review examines **one project**, a small set of **redacted artifacts**, and asks:
+The low-friction entry review focuses on **one real decision point** or **one bounded package of redacted evidence** and asks:
 
-> Does the final delivered release still line up with the supplied test evidence, post-test changes, issue closure, and handover package?
+> Does the evidence you have actually support the decision you are about to make?
 
-Typical scope: **8–12 redacted artifacts, 3–5 business days**. No source code, production-system access, or robot access is required.
+Typical review areas can include release/configuration identity, supplied test evidence, post-test changes, issue closure, handover evidence, and unresolved assumptions.
+
+**Entry review: USD 499 · 24–48 hours.**
+
+The output is a concise red-flag review covering:
+- what the supplied evidence supports;
+- which relationships or claims are not established;
+- critical ambiguities;
+- questions to take back to the supplier or project team;
+- prioritized next actions before the decision.
+
+No source code, production-system access, credentials, cloud-account access, or robot access is required.
 
 For independent review inquiries, contact **llorix218@gmail.com**. Do not post confidential project material in a public issue.
 
 ## Scope discipline
 
 V0.1 intentionally stops at these three checks. It has no accounts, hosted service, database, robot connector, continuous monitoring, or production integration.
+
+The public checker is deliberately narrow. Feedback about broader acceptance and handover evidence problems is useful, but those ideas are not automatically part of V0.1.
 
 ## 90-second walkthrough
 
