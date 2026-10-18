@@ -89,6 +89,19 @@ class ClosureRecord:
         )
 
 
+@dataclass(frozen=True)
+class VerificationRecord:
+    verification_id: str
+    release_id: str
+
+    @classmethod
+    def from_json(cls, data: dict[str, Any]) -> "VerificationRecord":
+        return cls(
+            verification_id=_required_str(data, "verification_id"),
+            release_id=_required_str(data, "release_id"),
+        )
+
+
 def _required_str(data: dict[str, Any], key: str) -> str:
     value = data.get(key)
     if not isinstance(value, str) or not value.strip():
@@ -100,9 +113,12 @@ def latest_qualifying_pass(
     tests: Iterable[TestRecord],
     *,
     not_after: datetime | None = None,
+    release_id: str | None = None,
 ) -> TestRecord | None:
     passing = [
         t for t in tests
-        if t.status == "PASS" and (not_after is None or t.completed_at <= not_after)
+        if t.status == "PASS"
+        and (not_after is None or t.completed_at <= not_after)
+        and (release_id is None or t.release_id == release_id)
     ]
     return max(passing, key=lambda t: t.completed_at, default=None)
