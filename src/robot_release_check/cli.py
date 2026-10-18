@@ -14,10 +14,14 @@ from .report import build_json_report, render_text, write_html
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="robot-release-check",
-        description="Check whether supplied robot release evidence still covers the declared delivered release.",
+        description="Check declarative consistency across supplied robot release and acceptance evidence.",
     )
     p.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
-    p.add_argument("project_dir", type=Path, help="Directory containing release.json, tests.json, changes.json, closures.json")
+    p.add_argument(
+        "project_dir",
+        type=Path,
+        help="Directory containing release.json, tests.json, changes.json, closures.json, verifications.json",
+    )
     p.add_argument("--html", type=Path, help="Write an HTML report to this path")
     p.add_argument("--json", dest="json_out", type=Path, help="Write machine-readable findings JSON to this path")
     return p
@@ -26,8 +30,8 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        release, tests, changes, closures = load_project(args.project_dir)
-        findings = run_checks(release, tests, changes, closures)
+        release, tests, changes, closures, verifications = load_project(args.project_dir)
+        findings = run_checks(release, tests, changes, closures, verifications)
     except (OSError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
