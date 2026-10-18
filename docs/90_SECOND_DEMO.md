@@ -2,13 +2,13 @@
 
 ## Goal
 
-Show one problem, one command, one result. Do not explain a larger platform.
+Show one narrow evidence-consistency problem, one command, one result. Do not explain or imply a larger platform.
 
 ## 0–15 seconds — the scenario
 
-> This project passed acceptance testing as `v1.4`. After that, two configuration changes were made and `v1.4.1` was declared for delivery. The supplied package contains no later qualifying PASS evidence before delivery.
+> The supplied project records show an acceptance PASS for `v1.4`. Later changes are recorded against `v1.4.1`, which is then declared for delivery. No qualifying PASS naming `v1.4.1` is supplied before delivery. The closed issue references `verification-note-17`, but the local verification record names `v1.4`, not `v1.4.1`.
 
-Show the four small JSON files in `examples/late-change/`.
+Show the five small JSON files in `examples/late-change/`.
 
 ## 15–35 seconds — run the tool
 
@@ -23,11 +23,13 @@ The expected process exit code is `1` because review is required.
 Point only to:
 
 ```text
-Delivered Release            v1.4.1
-Latest Qualifying PASS       v1.4
+Declared Delivered Release   v1.4.1
+Latest Supplied PASS         v1.4
 
 R001  EVIDENCE_MISMATCH
 R002  EVIDENCE_GAP
+R003  PASS
+R004  EVIDENCE_GAP
 
 OVERALL
 REVIEW REQUIRED
@@ -35,12 +37,14 @@ REVIEW REQUIRED
 
 Say:
 
-> The tool is not saying the robot was unsafe or that testing never happened. It is saying the evidence supplied here does not establish that the delivered release is covered by the latest qualifying PASS evidence.
+> The tool is not identifying the actual deployed artifact and it is not saying the robot was unsafe or that testing never happened. It is saying the supplied records do not establish these four modeled evidence relationships cleanly.
 
 ## 60–80 seconds — open the HTML report
 
-Show the three rule rows and the interpretation boundary. Do not spend time on implementation details.
+Show the four rule rows and the interpretation boundary. Point out that R003 only checks reference presence and R004 only checks local reference-to-release-ID binding.
+
+Do not claim that PASS proves sufficient test coverage, artifact identity, safety, compliance, or production readiness.
 
 ## 80–90 seconds — CTA
 
-> If a real robot deployment is approaching acceptance, the same question can be reviewed against a small redacted evidence set without source code, production access, or robot access.
+> If a real robot or automation project is approaching acceptance or handover, a bounded independent review can examine one decision point or redacted evidence package without source code, production access, credentials, or robot access.
