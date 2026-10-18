@@ -9,7 +9,9 @@ from .models import Release, TestRecord, latest_qualifying_pass
 
 DISCLAIMER = (
     "This result identifies gaps or mismatches in the supplied evidence. "
-    "It does not establish that the physical system was unsafe, untested, or incorrectly deployed."
+    "PASS only means the modeled V0.2 relationships passed; it does not establish sufficient test coverage, physical-system safety, compliance, or deployment correctness. "
+    "R003 PASS only establishes that a non-empty verification reference was supplied; R004 checks only whether a supplied local verification record resolves to the declared delivered release_id. "
+    "Neither rule validates the referenced artifact's truth, contents, signature, completeness, or adequacy."
 )
 
 
@@ -18,8 +20,8 @@ def render_text(release: Release, tests: list[TestRecord], findings: list[Findin
     lines = [
         "ROBOT RELEASE EVIDENCE REVIEW",
         "",
-        f"Delivered Release            {release.release_id}",
-        f"Latest Qualifying PASS       {latest.release_id if latest else 'NOT PROVIDED'}",
+        f"Declared Delivered Release   {release.release_id}",
+        f"Latest Supplied PASS         {latest.release_id if latest else 'NOT PROVIDED'}",
         "",
     ]
     for f in findings:
@@ -37,10 +39,10 @@ def render_text(release: Release, tests: list[TestRecord], findings: list[Findin
 def build_json_report(release: Release, tests: list[TestRecord], findings: list[Finding]) -> dict:
     latest = latest_qualifying_pass(tests, not_after=release.delivered_at)
     return {
-        "schema_version": "1",
-        "delivered_release": release.release_id,
+        "schema_version": "2",
+        "declared_delivered_release": release.release_id,
         "delivered_at": release.delivered_at.isoformat(),
-        "latest_qualifying_pass": None if latest is None else {
+        "latest_supplied_qualifying_pass": None if latest is None else {
             "test_id": latest.test_id,
             "release_id": latest.release_id,
             "completed_at": latest.completed_at.isoformat(),
@@ -150,8 +152,8 @@ code {{ background:#eef2f7 !important; color:#0f172a !important; padding:2px 6px
 <h1>Robot Release Evidence Review</h1>
 <p class="muted">Offline evidence-consistency review of the supplied project files.</p>
 <div class="summary">
-  <div class="card"><strong>Delivered Release</strong>{escape(release.release_id)}</div>
-  <div class="card"><strong>Latest Qualifying PASS</strong>{escape(latest.release_id if latest else 'NOT PROVIDED')}</div>
+  <div class="card"><strong>Declared Delivered Release</strong>{escape(release.release_id)}</div>
+  <div class="card"><strong>Latest Supplied PASS</strong>{escape(latest.release_id if latest else 'NOT PROVIDED')}</div>
   <div class="card"><strong>Overall</strong><span class="overall">{escape(overall)}</span></div>
 </div>
 <table>
@@ -160,6 +162,6 @@ code {{ background:#eef2f7 !important; color:#0f172a !important; padding:2px 6px
 </table>
 {''.join(detail_sections)}
 <div class="notice"><strong>Interpretation boundary</strong><br>{escape(DISCLAIMER)}</div>
-<div class="cta"><strong>Have a real robot deployment approaching acceptance?</strong><br>Independent evidence review can examine one scoped project using redacted materials, without source-code, production-system, or robot access.</div>
+<div class="cta"><strong>Have a real robot deployment approaching acceptance or handover?</strong><br>Independent evidence review can examine one bounded decision point or redacted evidence package without source-code, production-system, credential, or robot access.</div>
 </body></html>"""
     path.write_text(html, encoding="utf-8")
